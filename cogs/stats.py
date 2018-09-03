@@ -12,7 +12,7 @@ class Stats:
     @commands.command(pass_context=True)
     async def stats(self, ctx, amount=1):
         """
-        Show stats about NORT
+        Show stats about NDB
         """
         channel_name = ctx.message.channel.name
         allowed_channels = parsing.parse_json('config.json')['command_channels'][ctx.command.name]
@@ -27,8 +27,8 @@ class Stats:
                     priceData = json.loads(responseRaw)
                     for item in priceData:
                         embed= discord.Embed(colour=0x00FF00)
-                        embed.set_author(name='NORT Information', icon_url="http://explorer.nort.network/images/logo.png")
-                        embed.add_field(name="Price (BTC)", value="${}".format(item['price']))                    
+                        embed.set_author(name='NDB Information', icon_url="http://explorer.nort.network/images/logo.png")
+                        embed.add_field(name="Price (BTC)", value="${}".format(item['price']))
                         embed.set_footer(text="https://wallet.crypto-bridge.org/market/BRIDGE.NORT_BRIDGE.BTC", icon_url="http://explorer.nort.network/images/logo.png")
                     await self.bot.say(embed=embed)
         except:

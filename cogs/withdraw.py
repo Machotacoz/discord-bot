@@ -13,8 +13,8 @@ class Withdraw:
 
     @commands.command(pass_context=True)
     async def withdraw(self, ctx, address: str, amount: float):
-        """Withdraw coins from your account to any Northern address"""
-        snowflake = ctx.message.author.id    
+        """Withdraw coins from your account to any NodeBase address"""
+        snowflake = ctx.message.author.id
         channel_name = ctx.message.channel.name
         allowed_channels = parsing.parse_json('config.json')['command_channels'][ctx.command.name]
         if channel_name not in allowed_channels:
@@ -55,7 +55,7 @@ class Withdraw:
         if txid is None:
             await self.bot.say("{} your withdraw failed despit having the necessary balance! Please contact the support team".format(ctx.message.author.mention))
         else:
-            await self.bot.say("{} **Withdrew {} NORT! <:nort:469787831137599488>**{} ".format(ctx.message.author.mention, str(amount), txid))
+            await self.bot.say("{} **Withdrew {} NDB! <:NDBcoin:476447936193101832>**{} ".format(ctx.message.author.mention, str(amount), txid))
 
 def setup(bot):
     bot.add_cog(Withdraw(bot))

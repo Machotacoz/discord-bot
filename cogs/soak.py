@@ -73,7 +73,7 @@ class Soak:
 
         amount_split = math.floor(float(amount) * 1e8 / len_receivers) / 1e8
         if amount_split == 0:
-            await self.bot.say("{} **:warning: {} NORT is not enough to split between {} users! :warning:**".format(ctx.message.author.mention, amount, len_receivers))
+            await self.bot.say("{} **:warning: {} NDB is not enough to split between {} users! :warning:**".format(ctx.message.author.mention, amount, len_receivers))
             return
         receivers = []
         for i in range(int(len_receivers)):
@@ -82,15 +82,15 @@ class Soak:
             online_users.remove(user)
             mysql.check_for_user(user.id)
             mysql.add_tip(snowflake, user.id, amount_split)
-        long_soak_msg = ":moneybag: {} **Soaked {} NORT on {} [Total {} NORT]** :moneybag:\nNOTE: You can opt out of soak by doing \"!soakme 0\". This will ensure you do not get picked for soak.".format(ctx.message.author.mention, str(amount_split), ', '.join([x.mention for x in receivers]), str(amount))
+        long_soak_msg = ":moneybag: {} **Soaked {} NDB on {} [Total {} NDB]** :moneybag:\nNOTE: You can opt out of soak by doing \"!soakme 0\". This will ensure you do not get picked for soak.".format(ctx.message.author.mention, str(amount_split), ', '.join([x.mention for x in receivers]), str(amount))
 
         if len(long_soak_msg) > 2000:
-            await self.bot.say(":moneybag: {} **Soaked {} NORT on {} users [{}]** :moneybag:".format(ctx.message.author.mention, str(amount_split), len_receivers, str(amount)))
+            await self.bot.say(":moneybag: {} **Soaked {} NDB on {} users [{}]** :moneybag:".format(ctx.message.author.mention, str(amount_split), len_receivers, str(amount)))
         else:
             await self.bot.say(long_soak_msg)
 
     @commands.command(pass_context=True)
-    async def soak_info(self, ctx):        
+    async def soak_info(self, ctx):
         """Display min soak amount and maximum soak recipients"""
         channel_name = ctx.message.channel.name
         allowed_channels = parsing.parse_json('config.json')['command_channels'][ctx.command.name]
@@ -106,7 +106,7 @@ class Soak:
             st_min_received = str(self.soak_min_received)
         else:
             st_min_received = "<disabled>"
-            
+
         await self.bot.say(":information_source: Soak info: max recipients {}, min amount receivable {} :information_source:".format(st_max_users, st_min_received))
 
     @commands.command(pass_context=True)
@@ -139,8 +139,8 @@ class Soak:
             await self.bot.say("Ok! You will be soaked! :white_check_mark:")
         else:
             await self.bot.say("Ok! You will no longer be soaked! :no_entry_sign:")
-           
-        
+
+
 
 def setup(bot):
     bot.add_cog(Soak(bot))

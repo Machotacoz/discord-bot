@@ -36,10 +36,10 @@ class Tip:
         balance = mysql.get_balance(snowflake, check_update=True)
 
         if float(balance) < amount:
-            await self.bot.say("{} **:warning:You cannot tip more NORT than you have!:warning:**".format(ctx.message.author.mention))
+            await self.bot.say("{} **:warning:You cannot tip more NDB than you have!:warning:**".format(ctx.message.author.mention))
         else:
             mysql.add_tip(snowflake, tip_user, amount)
-            await self.bot.say("{} **Tipped {} {} NORT! <:nort:469787831137599488>**".format(ctx.message.author.mention, user.mention, str(amount)))
+            await self.bot.say("{} **Tipped {} {} NDB! <:NDBcoin:476447936193101832>**".format(ctx.message.author.mention, user.mention, str(amount)))
 
 def setup(bot):
     bot.add_cog(Tip(bot))
